@@ -12,7 +12,6 @@ GeomItem::GeomItem(float xPos, float yPos,
     this->radius = radius;
     this->numberOfLines = numberOfLines;
     this->linesColor = linesColor;
-
 }
 
 GeomItem::~GeomItem()
@@ -48,4 +47,14 @@ void GeomItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     }
 
 
+}
+
+void GeomItem::setParameters(float xPos, float yPos, float radius, int numberOfLines, QColor linesColor)
+{
+    this->xPos = xPos;
+    this->yPos = yPos;
+    this->radius = radius;
+    this->numberOfLines = numberOfLines;
+    this->linesColor = linesColor;
+    update();
 }
