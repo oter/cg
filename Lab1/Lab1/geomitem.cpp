@@ -34,6 +34,7 @@ void GeomItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     painter->setBrush(brush);
 
     QPen pen;
+    pen.setWidth(2);
     pen.setColor(this->linesColor);
     painter->setPen(pen);
 
@@ -49,12 +50,15 @@ void GeomItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 
 }
 
-void GeomItem::setParameters(float xPos, float yPos, float radius, int numberOfLines, QColor linesColor)
-{
-    this->xPos = xPos;
-    this->yPos = yPos;
+void GeomItem::changeParams(float radius, int numberOfLines, QColor linesColor)
+{   
     this->radius = radius;
     this->numberOfLines = numberOfLines;
     this->linesColor = linesColor;
-    update();
+}
+
+void GeomItem::changePosition(float xPos, float yPos)
+{
+    this->xPos = xPos;
+    this->yPos = yPos;
 }

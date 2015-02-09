@@ -14,9 +14,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    geomitem.cpp
+    geomitem.cpp \
+    scene.cpp
 
 HEADERS  += mainwindow.h \
-    geomitem.h
+    geomitem.h \
+    scene.h
 
 FORMS    += mainwindow.ui

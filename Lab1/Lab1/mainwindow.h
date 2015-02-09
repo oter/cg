@@ -6,6 +6,8 @@
 
 #include "geomitem.h"
 
+#include "scene.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -21,7 +23,7 @@ public:
 private:
     Ui::MainWindow *ui;
 
-    QGraphicsScene* scene;
+    Scene* scene;
     GeomItem *item;
 
 };

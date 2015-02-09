@@ -18,8 +18,8 @@ public:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
-    void setParameters(float xPos, float yPos, float radius, int numberOfLines, QColor linesColor);
-
+    void changeParams(float radius, int numberOfLines, QColor linesColor);
+    void changePosition(float xPos, float yPos);
 
 private:
     float xPos, yPos;
