@@ -23,8 +23,26 @@ GeomItem::~GeomItem()
 
 QRectF GeomItem::boundingRect() const
 {
-    QRectF rect(QPointF(-radius - 1, -radius - 1), QSizeF(2 * radius + 1, 2 * radius + 1));
+    QRectF rect(QPointF(-3 * radius - 1 + xPos, -3 * radius - 1 + yPos), QSizeF(6 * radius + 1, 6 * radius + 1));
     return rect;
+}
+
+void GeomItem::iterPaint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget, float x, float y,
+                         int nIter)
+{
+    for (int j = 0; j < 2 * numberOfLines; ++j)
+    {
+        float xLocal = x + radius * qSin((float)j * M_PI / (numberOfLines));
+        float yLocal = y + radius * qCos((float)j * M_PI / (numberOfLines));
+
+        if (nIter <= numberOfIterations)
+        {
+            iterPaint(painter, option, widget, xLocal, yLocal, nIter + 1);
+        }
+
+        QLineF line(QPointF(x, y), QPointF(xLocal, yLocal));
+        painter->drawLine(line);
+    }
 }
 
 void GeomItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -34,7 +52,7 @@ void GeomItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     painter->setBrush(brush);
 
     QPen pen;
-    pen.setWidth(2);
+    pen.setWidth(1);
     pen.setColor(this->linesColor);
     painter->setPen(pen);
 
@@ -45,16 +63,19 @@ void GeomItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
 
         QLineF line(QPointF(xPos, yPos), QPointF(x, y));
         painter->drawLine(line);
+
+        iterPaint(painter, option, widget, x, y, 2);
     }
 
 
 }
 
-void GeomItem::changeParams(float radius, int numberOfLines, QColor linesColor)
+void GeomItem::changeParams(float radius, int numberOfLines, QColor linesColor, int numberOfIterations)
 {   
     this->radius = radius;
     this->numberOfLines = numberOfLines;
     this->linesColor = linesColor;
+    this->numberOfIterations = numberOfIterations;
 }
 
 void GeomItem::changePosition(float xPos, float yPos)

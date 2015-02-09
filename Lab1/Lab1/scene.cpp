@@ -7,7 +7,7 @@
 
 Scene::Scene(QObject* parent) : QGraphicsScene(parent)
 {
-
+    numberOfIterations = 1;
 }
 
 Scene::~Scene()
@@ -30,14 +30,33 @@ void Scene::keyPressEvent(QKeyEvent *event)
     qDebug() << event->key();
     switch (event->key()) {
 
-    case 43:
+    case Qt::Key_Plus:
         numberOfLines++;
         break;
-    case 45:
+    case Qt::Key_Minus:
         if (numberOfLines > 0)
         {
             numberOfLines--;
         }
+        break;
+
+    case Qt::Key_Up:
+            radius++;
+            break;
+
+    case Qt::Key_Down:
+        if(radius > 0){
+            radius--;
+        }
+        break;
+    case Qt::Key_Left:
+        if (numberOfIterations > 0)
+        {
+            numberOfIterations--;
+        }
+        break;
+    case Qt::Key_Right:
+        numberOfIterations++;
         break;
     default:
         break;
@@ -45,7 +64,7 @@ void Scene::keyPressEvent(QKeyEvent *event)
 
     for (QGraphicsItem* item : this->items())
     {
-        ((GeomItem*)item)->changeParams(radius, numberOfLines, linesColor);
+        ((GeomItem*)item)->changeParams(radius, numberOfLines, linesColor, numberOfIterations);
     }
     update();
 }

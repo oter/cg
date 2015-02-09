@@ -20,6 +20,7 @@ protected:
 private:
     float radius;
     int numberOfLines;
+    int numberOfIterations;
     QColor linesColor;
 };
 
